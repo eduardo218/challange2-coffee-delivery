@@ -3,6 +3,8 @@ export const defaultTheme = {
     'base-title': '#272221',
     'base-subtitle': '#403937',
     'base-text': '#574f4d',
+    'base-label': '#8d8686',
+    'base-button': '#e6e5e5',
   
     'brand-purple-light': '#ebe5f9',
     'brand-purple' : '#8047f8',
