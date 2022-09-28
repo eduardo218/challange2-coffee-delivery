@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 export interface CartItem {
     id: number
@@ -11,7 +11,9 @@ export interface CartItem {
 interface CartContextTypes {
     cartItems: CartItem[]
     addItemToCart: (itemToAdd : CartItem) => void
-    removeItemFromCart: () => void
+    removeItemFromCart: (id: number) => void
+    increaseQuantity: (id: number) => void
+    decreaseQuantity: (id: number) => void
 }
 
 interface ProviderProps {
@@ -38,8 +40,31 @@ export const CartProvider = ({children}: ProviderProps) => {
         }
     }
 
-    const removeItemFromCart = () => {
-        setcartItems([])
+    const removeItemFromCart = (id: number) => {
+        const filteredCartItems = cartItems.filter(cartItem => cartItem.id !== id)
+        setcartItems(filteredCartItems)
+    }
+
+    const increaseQuantity = (id: number) => {
+        setcartItems(state => state.map(cartItem => {
+            if(cartItem.id === id){
+                const newQuantity = cartItem.quantity + 1
+                return {...cartItem, quantity: newQuantity}
+            }
+            return cartItem
+        }))
+    }
+
+    const decreaseQuantity = (id: number) => {
+        setcartItems(state => state.map(cartItem => {
+            if(cartItem.id === id && cartItem.quantity > 1){
+                const newQuantity = cartItem.quantity - 1
+                return {...cartItem, quantity: newQuantity}
+            }else if(cartItem.id === id && cartItem.quantity === 1){
+                removeItemFromCart(id)
+            }
+            return cartItem
+        }))
     }
 
 
@@ -48,7 +73,9 @@ export const CartProvider = ({children}: ProviderProps) => {
                     {
                         cartItems, 
                         addItemToCart, 
-                        removeItemFromCart
+                        removeItemFromCart,
+                        increaseQuantity,
+                        decreaseQuantity
                     }
                 }>
                 {children}

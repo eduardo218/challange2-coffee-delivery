@@ -55,6 +55,14 @@ export const ChangeItems = styled.div`
         line-height: 160%;
         cursor: pointer;
 
+        transition: background-color .1s;
+
+        &:hover {
+            padding: 0 7px;
+            background: ${props => props.theme["brand-purple-light"]};
+            border: 1px solid ${props => props.theme["brand-purple"]};
+        }
+
         svg {
         color: ${props => props.theme["brand-purple"]};
         }
