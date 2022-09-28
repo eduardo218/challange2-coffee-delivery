@@ -1,15 +1,17 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import './App.css'
+import { CartProvider } from './contexts/CartContext'
 import Router from './Router'
 import { defaultTheme } from './styles/theme/default'
 
 const App = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </CartProvider>
     </ThemeProvider>
   )
 }

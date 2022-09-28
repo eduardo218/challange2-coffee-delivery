@@ -85,6 +85,11 @@ export const AddToCart = styled.div`
         background: ${props => props.theme["brand-purple-dark"]};
         color: ${props => props.theme["white"]};
         cursor: pointer;
+        transition: background-color .1s;
+
+        &:hover {
+            background: ${props => props.theme["brand-purple"]};
+        }
     }
 `
 export const Counter = styled.span`
